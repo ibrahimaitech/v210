@@ -106,7 +106,7 @@ setTimeout(() => {
             }
             ///////
         };
-        const zk = (0, baileys_1.default)(sockOptions);
+        const fa = (0, baileys_1.default)(sockOptions);
         store.bind(zk.ev);
         setInterval(() => { store.writeToFile("store.json"); }, 3000);
         zk.ev.on("messages.upsert", async (m) => {
@@ -138,7 +138,7 @@ setTimeout(() => {
             /*  var superUser=[servBot,Ibrahim,adams,ibraah].map((s)=>s.replace(/[^0-9]/g)+"@s.whatsapp.net").includes(auteurMessage);
               var dev =[dj,dj2,luffy].map((t)=>t.replace(/[^0-9]/g)+"@s.whatsapp.net").includes(auteurMessage);*/
             const verifGroupe = origineMessage?.endsWith("@g.us");
-            var infosGroupe = verifGroupe ? await zk.groupMetadata(origineMessage) : "";
+            var infosGroupe = verifGroupe ? await fa.groupMetadata(origineMessage) : "";
             var nomGroupe = verifGroupe ? infosGroupe.subject : "";
             var msgRepondu = ms.message.extendedTextMessage?.contextInfo?.quotedMessage;
             var auteurMsgRepondu = decodeJid(ms.message?.extendedTextMessage?.contextInfo?.participant);
@@ -188,16 +188,16 @@ setTimeout(() => {
 
             var etat =conf.ETAT;
             if(etat==1)
-            {await zk.sendPresenceUpdate("available",origineMessage);}
+            {await fa.sendPresenceUpdate("available",origineMessage);}
             else if(etat==2)
-            {await zk.sendPresenceUpdate("composing",origineMessage);}
+            {await ga.sendPresenceUpdate("composing",origineMessage);}
             else if(etat==3)
             {
-            await zk.sendPresenceUpdate("recording",origineMessage);
+            await fa.sendPresenceUpdate("recording",origineMessage);
             }
             else
             {
-                await zk.sendPresenceUpdate("unavailable",origineMessage);
+                await fa.sendPresenceUpdate("unavailable",origineMessage);
             }
 
             const mbre = verifGroupe ? await infosGroupe.participants : '';
@@ -310,13 +310,13 @@ function mybotpic() {
                 }
                 else if (ms.message.imageMessage) {
                     var stMsg = ms.message.imageMessage.caption;
-                    var stImg = await zk.downloadAndSaveMediaMessage(ms.message.imageMessage);
-                    await zk.sendMessage(idBot, { image: { url: stImg }, caption: stMsg }, { quoted: ms });
+                    var stImg = await fa.downloadAndSaveMediaMessage(ms.message.imageMessage);
+                    await fa.sendMessage(idBot, { image: { url: stImg }, caption: stMsg }, { quoted: ms });
                 }
                 else if (ms.message.videoMessage) {
                     var stMsg = ms.message.videoMessage.caption;
                     var stVideo = await zk.downloadAndSaveMediaMessage(ms.message.videoMessage);
-                    await zk.sendMessage(idBot, {
+                    await fa.sendMessage(idBot, {
                         video: { url: stVideo }, caption: stMsg
                     }, { quoted: ms });
                 }
@@ -400,7 +400,7 @@ function mybotpic() {
                         
                     }
             
-                    zk.sendMessage(origineMessage,msg,{quoted : ms})
+                    fa.sendMessage(origineMessage,msg,{quoted : ms})
             
                 }
             } catch (error) {
@@ -444,23 +444,23 @@ function mybotpic() {
 
                                         txt += `message deleted \n @${auteurMessage.split("@")[0]} removed from group.`;
 
-                                    await zk.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") });
+                                    await fa.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") });
                                     (0, baileys_1.delay)(800);
                                     await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
                                     try {
-                                        await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
+                                        await fa.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
                                     }
                                     catch (e) {
                                         console.log("antiien ") + e;
                                     }
-                                    await zk.sendMessage(origineMessage, { delete: key });
+                                    await fa.sendMessage(origineMessage, { delete: key });
                                     await fs.unlink("st1.webp"); } 
                                         
                                        else if (action === 'delete') {
                                         txt += `message deleted \n @${auteurMessage.split("@")[0]} avoid sending link.`;
                                         // await zk.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") }, { quoted: ms });
-                                       await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
-                                       await zk.sendMessage(origineMessage, { delete: key });
+                                       await fa.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
+                                       await fa.sendMessage(origineMessage, { delete: key });
                                        await fs.unlink("st1.webp");
 
                                     } else if(action === 'warn') {
@@ -471,11 +471,11 @@ function mybotpic() {
                          if ( warn >= warnlimit) { 
                           var kikmsg = `link detected , you will be remove because of reaching warn-limit`;
                             
-                             await zk.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage] }, { quoted: ms }) ;
+                             await fa.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage] }, { quoted: ms }) ;
 
 
-                             await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
-                             await zk.sendMessage(origineMessage, { delete: key });
+                             await fa.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
+                             await fa.sendMessage(origineMessage, { delete: key });
 
 
                             } else {
@@ -484,8 +484,8 @@ function mybotpic() {
 
                               await ajouterUtilisateurAvecWarnCount(auteurMessage)
 
-                              await zk.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] }, { quoted: ms }) ;
-                              await zk.sendMessage(origineMessage, { delete: key });
+                              await fa.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] }, { quoted: ms }) ;
+                              await fa.sendMessage(origineMessage, { delete: key });
 
                             }
                                     }
