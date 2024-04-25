@@ -542,11 +542,11 @@ function mybotpic() {
 
                 txt += `message deleted \n @${auteurMessage.split("@")[0]} removed from group.`;
 
-            await zk.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") });
+            await fa.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") });
             (0, baileys_1.delay)(800);
-            await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
+            await fa.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
             try {
-                await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
+                await fa.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
             }
             catch (e) {
                 console.log("antibot ") + e;
@@ -557,9 +557,9 @@ function mybotpic() {
                else if (action === 'delete') {
                 txt += `message delete \n @${auteurMessage.split("@")[0]} Avoid sending link.`;
                 //await zk.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") }, { quoted: ms });
-               await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
-               await zk.sendMessage(origineMessage, { delete: key });
-               await fs.unlink("st1.webp");
+               await fa.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
+               await fa.sendMessage(origineMessage, { delete: key });
+               await fa.unlink("st1.webp");
 
             } else if(action === 'warn') {
                 const {getWarnCountByJID ,ajouterUtilisateurAvecWarnCount} = require('./bdd/warn') ;
@@ -569,11 +569,11 @@ function mybotpic() {
  if ( warn >= warnlimit) { 
   var kikmsg = `bot detected ;you will be remove because of reaching warn-limit`;
     
-     await zk.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage] }, { quoted: ms }) ;
+     await fa.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage] }, { quoted: ms }) ;
 
 
-     await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
-     await zk.sendMessage(origineMessage, { delete: key });
+     await fa.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
+     await fa.sendMessage(origineMessage, { delete: key });
 
 
     } else {
@@ -582,8 +582,8 @@ function mybotpic() {
 
       await ajouterUtilisateurAvecWarnCount(auteurMessage)
 
-      await zk.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] }, { quoted: ms }) ;
-      await zk.sendMessage(origineMessage, { delete: key });
+      await fa.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] }, { quoted: ms }) ;
+      await fa.sendMessage(origineMessage, { delete: key });
 
     }
                 }
@@ -758,8 +758,8 @@ ${metadata.desc}`;
                 console.log(`etablissement d'un automute pour ${crons[i].group_id} a ${set[0]} H ${set[1]}`)
 
                 cron.schedule(`${set[1]} ${set[0]} * * *`, async () => {
-                  await zk.groupSettingUpdate(crons[i].group_id, 'announcement');
-                  zk.sendMessage(crons[i].group_id, { image : { url : './media/chrono.webp'} , caption: "Hello, it's time to close the group; sayonara." });
+                  await fa.groupSettingUpdate(crons[i].group_id, 'announcement');
+                  fa.sendMessage(crons[i].group_id, { image : { url : './media/chrono.webp'} , caption: "Hello, it's time to close the group; sayonara." });
 
                 }, {
                     timezone: "Africa/Nairobi"
@@ -773,9 +773,9 @@ ${metadata.desc}`;
         
                 cron.schedule(`${set[1]} ${set[0]} * * *`, async () => {
 
-                  await zk.groupSettingUpdate(crons[i].group_id, 'not_announcement');
+                  await fa.groupSettingUpdate(crons[i].group_id, 'not_announcement');
 
-                  zk.sendMessage(crons[i].group_id, { image : { url : './media/chrono.webp'} , caption: "Good morning; It's time to open the group." });
+                  fa.sendMessage(crons[i].group_id, { image : { url : './media/chrono.webp'} , caption: "Good morning; It's time to open the group." });
 
                  
                 },{
